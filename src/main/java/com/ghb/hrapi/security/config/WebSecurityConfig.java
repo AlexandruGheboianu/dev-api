@@ -1,8 +1,6 @@
 package com.ghb.hrapi.security.config;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ghb.hrapi.security.RestAuthenticationEntryPoint;
 import com.ghb.hrapi.security.auth.ajax.AjaxAuthenticationProvider;
 import com.ghb.hrapi.security.auth.ajax.AjaxLoginProcessingFilter;
@@ -19,12 +17,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * WebSecurityConfig
@@ -37,9 +35,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
-    public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
-    public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
-    public static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/token";
+    private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
+    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
+    private static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/token";
     
     @Autowired private RestAuthenticationEntryPoint authenticationEntryPoint;
     @Autowired private AuthenticationSuccessHandler successHandler;
@@ -52,14 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private AuthenticationManager authenticationManager;
     
     @Autowired private ObjectMapper objectMapper;
-        
-    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
+
+    private AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(this.authenticationManager);
         return filter;
     }
-    
-    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
+
+    private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
         List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT);
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
         JwtTokenAuthenticationProcessingFilter filter 
