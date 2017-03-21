@@ -27,9 +27,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * AjaxLoginProcessingFilter
  * 
- * @author vladimir.stankovic
- *
- * Aug 3, 2016
  */
 public class AjaxLoginProcessingFilter extends AbstractAuthenticationProcessingFilter {
     private static Logger logger = LoggerFactory.getLogger(AjaxLoginProcessingFilter.class);

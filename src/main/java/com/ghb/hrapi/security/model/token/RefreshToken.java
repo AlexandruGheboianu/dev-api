@@ -13,9 +13,6 @@ import io.jsonwebtoken.Jws;
 /**
  * RefreshToken
  * 
- * @author vladimir.stankovic
- *
- * Aug 19, 2016
  */
 @SuppressWarnings("unchecked")
 public class RefreshToken implements JwtToken {

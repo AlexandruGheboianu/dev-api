@@ -8,9 +8,6 @@ import lombok.Setter;
 /**
  * Model intended to be used for AJAX based authentication.
  * 
- * @author vladimir.stankovic
- *
- * Aug 3, 2016
  */
 @Getter
 public class LoginRequest {

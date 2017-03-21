@@ -15,9 +15,6 @@ import javax.persistence.Table;
 /**
  * UserRole
  * 
- * @author vladimir.stankovic
- *
- *         Aug 18, 2016
  */
 @Entity
 @Table(name = "USER_ROLE")

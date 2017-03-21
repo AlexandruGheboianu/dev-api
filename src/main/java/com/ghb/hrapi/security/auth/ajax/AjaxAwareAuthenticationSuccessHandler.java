@@ -25,9 +25,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * AjaxAwareAuthenticationSuccessHandler
  * 
- * @author vladimir.stankovic
- *
- *         Aug 3, 2016
  */
 @Component
 public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

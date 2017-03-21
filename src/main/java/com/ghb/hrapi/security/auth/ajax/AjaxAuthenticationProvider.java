@@ -24,9 +24,6 @@ import org.springframework.util.Assert;
 
 /**
  * 
- * @author vladimir.stankovic
- *
- * Aug 3, 2016
  */
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
